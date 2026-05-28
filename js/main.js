@@ -37,7 +37,6 @@ function initScrollReveal() {
     { threshold: 0.08 },
   );
   els.forEach((el) => obs.observe(el));
-  // show first few immediately
   document.querySelectorAll(".reveal").forEach((el, i) => {
     if (i < 3) el.classList.add("shown");
   });
@@ -71,48 +70,53 @@ function startCountdown() {
   tick();
 }
 
-// ── GUESTS STORAGE (localStorage key) ──
-const STORAGE_KEY = "wedding_guests_pedro_ruth_2026";
-
-function getGuests() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-  } catch (e) {
-    return [];
-  }
-}
-function saveGuests(list) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list, null, 2));
-}
-
-// ── CONFIRM ATTENDANCE ──
-
-
+// ── CONFIRM ATTENDANCE → Netlify Forms ──
 function confirmAttendance() {
   const name = document.getElementById("f-name").value.trim();
   const attend = document.getElementById("f-attend").value;
+  const btn = document.getElementById("btn-confirm");
 
   if (!name) {
     alert("Por favor ingresa tu nombre.");
     return;
   }
 
-  const entry = {
-    id: Date.now(),
+  // Deshabilitar botón mientras envía
+  btn.disabled = true;
+  btn.textContent = "Enviando...";
+
+  const formData = new URLSearchParams({
+    "form-name": "confirmacion-boda",
     nombre: name,
     asistira: attend,
-    fecha_confirmacion: new Date().toLocaleString("es-DO"),
-  };
+  });
 
-  const guests = getGuests();
-  guests.push(entry);
-  saveGuests(guests);
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: formData.toString(),
+  })
+    .then((res) => {
+      if (res.ok) {
+        // Limpiar formulario
+        document.getElementById("f-name").value = "";
+        document.getElementById("f-attend").value = "Si";
 
-  // reset form
-  document.getElementById("f-name").value = "";
-  document.getElementById("f-attend").value = "Si";
-
-  const toast = document.getElementById("toast");
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 4000);
+        // Mostrar toast de éxito
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 4000);
+      } else {
+        throw new Error("Error en el servidor");
+      }
+    })
+    .catch(() => {
+      const toastErr = document.getElementById("toast-error");
+      toastErr.classList.add("show");
+      setTimeout(() => toastErr.classList.remove("show"), 4000);
+    })
+    .finally(() => {
+      btn.disabled = false;
+      btn.textContent = "✦ Confirmar Asistencia ✦";
+    });
 }
