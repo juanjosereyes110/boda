@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Vista previa para WhatsApp / redes -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://TU-URL-AQUI.com" />
+    <meta
+      property="og:title"
+      content="Pedro Luis & Ruth Esther — 26 · 06 · 2026"
+    />
+    <meta
+      property="og:description"
+      content="✦ Nos complace invitarte a nuestra boda. Viernes 26 de junio, 5:30 PM · Villa de Ramón de la Rosa, San Juan de la Maguana."
+    />
+    <meta
+      property="og:image"
+      content="https://TU-URL-AQUI.com/assets/img/1.jpeg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="theme-color" content="#7a5c42" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedro Luis & Ruth Esther — 26.06.2026</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Josefin+Sans:wght@100;200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- Petals -->
+    <div class="petal-bg" id="petals"></div>
+
+    <!-- ══ ENVELOPE ══ -->
+    <div id="envelope-wrapper">
+      <div style="text-align: center; position: relative">
+        <div class="envelope" onclick="openInvitation()">
+          <div class="env-body">
+            <div class="env-flap">
+              <div
+                style="
+                  width: 40px;
+                  height: 2px;
+                  background: rgba(255, 255, 255, 0.15);
+                  margin-top: 20px;
+                "
+              ></div>
+            </div>
+            <div class="env-seal">P&nbsp;|&nbsp;R</div>
+            <div class="env-names">
+              <span class="script">Pedro Luis</span>
+              <span class="amp">&amp;</span>
+              <span class="script">Ruth Esther</span>
+            </div>
+            <p class="env-date-tag">26 · 06 · 2026</p>
+          </div>
+        </div>
+        <button class="env-cta" onclick="openInvitation()">
+          ✦ Abrir Invitación ✦
+        </button>
+      </div>
+    </div>
+
+    <!-- ══ INVITATION ══ -->
+    <div id="invitation">
+      <!-- HERO -->
+      <div class="hero reveal">
+        <p class="hero-announce">✦ Nos complace anunciar ✦</p>
+        <div class="hero-initials">
+          <span class="init-letter">P</span>
+          <div class="init-sep"></div>
+          <span class="init-letter">R</span>
+        </div>
+        <h1 class="hero-title">Pedro Luis</h1>
+        <span class="hero-amp">&amp;</span>
+        <h1 class="hero-title">Ruth Esther</h1>
+        <p class="hero-date">26 · 06 · 2026</p>
+      </div>
+
+      <!-- FOTO PRINCIPAL -->
+      <div class="photo-frame reveal">
+        <img src="assets/img/1.jpeg" alt="Pedro Luis y Ruth Esther" />
+      </div>
+
+      <!-- TEXTO BIENVENIDA -->
+      <div class="section section-cream reveal" style="text-align: center">
+        <p
+          style="
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: var(--brown-mid);
+            margin-bottom: 16px;
+          "
+        >
+          NUESTRA BODA
+        </p>
+        <p
+          style="
+            font-family: &quot;Cormorant Garamond&quot;, serif;
+            font-size: 19px;
+            line-height: 1.9;
+            color: var(--text-mid);
+          "
+        >
+          Nos complace anunciar nuestra boda y queremos compartir contigo este
+          momento tan especial.
+        </p>
+      </div>
+
+      <!-- QUOTE -->
+      <div class="section section-white reveal" style="padding: 0">
+        <div class="quote">
+          "El amor todo lo sufre, todo lo cree, todo lo espera, todo lo
+          soporta."
+          <br /><span style="font-size: 13px; letter-spacing: 3px; opacity: 0.5"
+            >— 1 Corintios 13:7</span
+          >
+        </div>
+        <div class="player">
+          <audio
+            id="bg-music"
+            src="assets/audio/hasta%20mi%20final.mpeg"
+            preload="auto"
+          ></audio>
+          <button class="player-btn" title="Anterior">⏮</button>
+          <div class="player-line"></div>
+          <button
+            class="player-btn main"
+            title="Reproducir"
+            onclick="
+              const m = document.getElementById('bg-music');
+              if (m.paused) {
+                m.play();
+                this.textContent = '⏸';
+              } else {
+                m.pause();
+                this.textContent = '▶';
+              }
+            "
+          >
+            ▶
+          </button>
+          <div class="player-line"></div>
+          <button class="player-btn" title="Siguiente">⏭</button>
+        </div>
+        <p
+          style="
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--brown-mid);
+            padding-bottom: 28px;
+            opacity: 0.6;
+          "
+        >
+          DALE PLAY A NUESTRA CANCIÓN
+        </p>
+      </div>
+
+      <!-- FOTO 2 -->
+      <div class="photo-frame reveal" style="aspect-ratio: 3/2">
+        <img src="assets/img/2.jpeg" alt="Pedro Luis y Ruth Esther" />
+      </div>
+
+      <!-- EL GRAN DÍA / CALENDARIO -->
+      <div class="section section-brown reveal">
+        <p class="section-title section-title-brown">— El Gran Día —</p>
+        <p
+          style="
+            font-family: &quot;Cormorant Garamond&quot;, serif;
+            font-style: italic;
+            font-size: 21px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+          "
+        >
+          Junio 2026
+        </p>
+        <table class="calendar">
+          <thead>
+            <tr>
+              <th>LUN</th>
+              <th>MAR</th>
+              <th>MIÉ</th>
+              <th>JUE</th>
+              <th>VIE</th>
+              <th>SÁB</th>
+              <th>DOM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>5</td>
+              <td>6</td>
+              <td>7</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>9</td>
+              <td>10</td>
+              <td>11</td>
+              <td>12</td>
+              <td>13</td>
+              <td>14</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>16</td>
+              <td>17</td>
+              <td>18</td>
+              <td>19</td>
+              <td>20</td>
+              <td>21</td>
+            </tr>
+            <tr>
+              <td>22</td>
+              <td>23</td>
+              <td>24</td>
+              <td>25</td>
+              <td class="today">26</td>
+              <td>27</td>
+              <td>28</td>
+            </tr>
+            <tr>
+              <td>29</td>
+              <td>30</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FOTO 3 -->
+      <!-- <div class="photo-frame reveal" style="aspect-ratio: 3/2">
+        <div class="photo-placeholder">
+          📷<br />Tercera Foto<br /><span style="font-size: 12px; opacity: 0.6"
+            >(reemplaza con tu imagen)</span
+          >
+        </div>
+      </div> -->
+
+      <!-- LUGAR -->
+      <div class="section section-white reveal" style="text-align: center">
+        <div class="icon-ring">💍</div>
+        <p class="section-title" style="color: var(--brown-mid)">— Lugar —</p>
+        <p class="lugar-time">5:30 PM</p>
+        <p class="lugar-name">Villa de Ramón de la Rosa</p>
+        <p class="lugar-address">
+          San Juan de la Maguana, República Dominicana
+        </p>
+        <p
+          class="lugar-address"
+          style="
+            font-size: 14px;
+            margin-top: 6px;
+            opacity: 0.8;
+            letter-spacing: 0.5px;
+          "
+        >
+          Coordenadas: 18.776725, -71.244502
+        </p>
+        <a
+          class="btn-outline"
+          href="https://maps.app.goo.gl/ed8ts7C3PKJipToq7"
+          target="_blank"
+          >📍 Ver Ubicación</a
+        >
+      </div>
+
+      <!-- DRESSCODE -->
+      <div class="section section-cream reveal" style="text-align: center">
+        <p class="section-title" style="color: var(--brown-mid)">
+          — Código de Vestimenta —
+        </p>
+        <div class="dress-icon">👗🤵</div>
+        <p class="dress-type">Formal</p>
+        <p class="dress-rule">
+          <strong>Mujeres:</strong> Por favor, evitar los colores blanco, beige
+          y negro.<br /><br />
+          <strong>Hombres:</strong> Por favor, evitar el color beige y tonos
+          similares.
+        </p>
+        <div style="margin-top: 24px">
+          <img
+            src="assets/img/paleta%20de%20colores.jpeg"
+            alt="Paleta de colores sugerida"
+            style="
+              max-width: 100%;
+              border-radius: 8px;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            "
+          />
+        </div>
+      </div>
+
+      <!-- REGALO -->
+      <div class="section section-brown reveal">
+        <p class="section-title section-title-brown">
+          — Sugerencia de Regalo —
+        </p>
+        <p
+          style="
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            margin-bottom: 28px;
+            line-height: 1.8;
+          "
+        >
+          El mejor regalo es tu presencia, pero si deseas tener un detalle con
+          nosotros, te dejamos estas opciones.
+        </p>
+        <div class="regalo-item">
+          <span class="regalo-icon">✉️</span>
+          <div>
+            <p class="regalo-title">Lluvia de Sobres</p>
+            <p class="regalo-desc">
+              Una contribución en efectivo siempre es bienvenida y apreciada con
+              mucho amor.
+            </p>
+          </div>
+        </div>
+        <div class="regalo-item">
+          <span class="regalo-icon">🏦</span>
+          <div>
+            <p class="regalo-title">Transferencia</p>
+            <p class="regalo-desc">
+              Banco: Banco Banreservas<br />
+              Cuenta Corriente: 9608280160 <br />
+              Titular: Pedro Luis Valenzuela
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIN NIÑOS -->
+      <div class="notice reveal">
+        <span class="notice-icon">🚫</span>
+        <div>
+          <p class="notice-title">Sin Niños</p>
+          <p class="notice-text">
+            Es nuestro día especial y aunque amamos a los niños, nuestra boda
+            será solo para adultos. ¡Tómense un descanso y disfruten con
+            nosotros!
+          </p>
+        </div>
+      </div>
+
+      <!-- COUNTDOWN -->
+      <div class="countdown-wrap reveal">
+        <p class="countdown-label">Faltan</p>
+        <p class="countdown-date-big">VIERNES · 26 · JUNIO · 2026</p>
+        <div class="countdown">
+          <div class="count-item">
+            <span class="count-num" id="cd-days">--</span>
+            <span class="count-lbl">Días</span>
+          </div>
+          <div class="count-item">
+            <span class="count-num" id="cd-hours">--</span>
+            <span class="count-lbl">Horas</span>
+          </div>
+          <div class="count-item">
+            <span class="count-num" id="cd-mins">--</span>
+            <span class="count-lbl">Minutos</span>
+          </div>
+          <div class="count-item">
+            <span class="count-num" id="cd-secs">--</span>
+            <span class="count-lbl">Segundos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONFIRMACIÓN -->
+      <div class="form-section reveal">
+        <p class="section-title" style="color: var(--brown-mid)">
+          — Confirmación —
+        </p>
+        <h2 class="form-title">Confirmar aquí</h2>
+        <p class="form-sub">ANTES DEL 15 DE JUNIO · 2026</p>
+        <p
+          style="
+            font-size: 14px;
+            text-align: center;
+            color: var(--text-mid);
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+            line-height: 1.8;
+          "
+        >
+          Agradecemos que confirmes tu asistencia para poder prepararnos mejor
+          para recibirte.
+        </p>
+
+        <div class="form-group">
+          <label>Nombre del que se le envió la invitación</label>
+          <input type="text" id="f-name" placeholder="Ej: María González" />
+        </div>
+        <div class="form-group">
+          <label>¿Vas a asistir?</label>
+          <select id="f-attend">
+            <option value="Si">Sí, asistiré</option>
+            <option value="No">No podré asistir</option>
+          </select>
+        </div>
+        <button class="btn-confirm" onclick="confirmAttendance()">
+          ✦ Confirmar Asistencia ✦
+        </button>
+        <div class="toast" id="toast">
+          ¡Gracias! Tu asistencia ha sido confirmada 🤍
+        </div>
+      </div>
+
+      <!-- CLOSING -->
+      <div class="closing reveal">
+        <p class="closing-sub">— CON TODO NUESTRO AMOR —</p>
+        <p class="closing-script">¡Muchas Gracias!</p>
+        <p class="closing-sub" style="margin-top: 8px; margin-bottom: 28px">
+          ESPERAMOS CONTAR CON SU PRESENCIA
+        </p>
+        <div class="closing-initials">
+          <span class="ci">P</span>
+          <div class="ci-sep"></div>
+          <span class="ci">R</span>
+        </div>
+      </div>
+    </div>
+    <!-- /invitation -->
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

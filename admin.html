@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administración — Confirmados P&R</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Josefin+Sans:wght@100;200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+      body {
+        padding: 40px 20px;
+        background: #e8ddd0;
+      }
+      .admin-container {
+        width: min(500px, 100vw);
+        background: var(--white);
+        border-radius: 8px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        padding: 32px;
+        position: relative;
+        overflow: hidden;
+      }
+      .admin-header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .admin-title {
+        font-family: "Great Vibes", cursive;
+        font-size: 42px;
+        color: var(--brown);
+        line-height: 1.1;
+      }
+      .admin-subtitle {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--brown-mid);
+        margin-top: 8px;
+        margin-bottom: 24px;
+      }
+      .search-box {
+        width: 100%;
+        padding: 12px 16px;
+        font-family: "Josefin Sans", sans-serif;
+        font-size: 13px;
+        border: 1px solid var(--cream-dark);
+        background: var(--cream);
+        border-radius: 4px;
+        margin-bottom: 20px;
+        outline: none;
+        box-sizing: border-box;
+      }
+      .search-box:focus {
+        border-color: var(--brown-mid);
+      }
+      .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        font-size: 18px;
+        color: var(--text-mid);
+      }
+      .actions-container {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+      }
+      .back-btn {
+        display: block;
+        text-align: center;
+        margin-top: 24px;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: var(--brown);
+        text-decoration: none;
+        font-family: "Josefin Sans", sans-serif;
+        text-transform: uppercase;
+      }
+      .back-btn:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Petals -->
+    <div class="petal-bg" id="petals"></div>
+
+    <div class="admin-container">
+      <div class="admin-header">
+        <h1 class="admin-title">Pedro & Ruth</h1>
+        <p class="admin-subtitle">Lista de Confirmados</p>
+      </div>
+
+      <input
+        type="text"
+        id="search"
+        class="search-box"
+        placeholder="🔍 Buscar por nombre..."
+        oninput="renderList()"
+      />
+
+      <div id="guest-list"></div>
+
+      <div class="actions-container">
+        <button class="btn-outline" onclick="exportJSON()" style="flex: 1; text-align: center;">
+          ⬇ Exportar JSON
+        </button>
+        <button
+          class="btn-outline"
+          onclick="clearGuests()"
+          style="flex: 1; text-align: center; border-color: #c9a0a0; color: #c9a0a0;"
+        >
+          🗑 Limpiar Todo
+        </button>
+      </div>
+
+      <a href="index.html" class="back-btn">✦ Volver a la Invitación ✦</a>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "wedding_guests_pedro_ruth_2026";
+
+      function getGuests() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function saveGuests(list) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list, null, 2));
+      }
+
+      function renderList() {
+        const guests = getGuests();
+        const searchTerm = document.getElementById("search").value.trim().toLowerCase();
+        const listDiv = document.getElementById("guest-list");
+
+        // Filter guests by search term
+        const filteredGuests = guests.filter(g => 
+          g.nombre.toLowerCase().includes(searchTerm)
+        );
+
+        if (guests.length === 0) {
+          listDiv.innerHTML = '<div class="empty-state">Aún no hay confirmaciones registradas.</div>';
+          document.querySelector(".actions-container").style.display = "none";
+          return;
+        }
+
+        document.querySelector(".actions-container").style.display = "flex";
+
+        if (filteredGuests.length === 0) {
+          listDiv.innerHTML = '<div class="empty-state">No se encontraron confirmados con ese nombre.</div>';
+          return;
+        }
+
+        listDiv.innerHTML = filteredGuests
+          .map(
+            (g) => `
+          <div class="guest-entry" data-id="${g.id}">
+            <div>
+              <div class="g-name" style="font-weight: 400; font-size: 14px;">${g.nombre}</div>
+              <div style="font-size:12px;color:var(--brown-mid);letter-spacing:1px;margin-top:2px;">
+                Asistirá: <strong>${g.asistira}</strong> · ${g.fecha_confirmacion}
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button class="g-delete" onclick="deleteGuest(${g.id})" style="cursor:pointer;">✕</button>
+            </div>
+          </div>
+        `
+          )
+          .join("");
+
+        const totalYes = guests.filter((g) => g.asistira === "Si").length;
+        const totalNo = guests.filter((g) => g.asistira === "No").length;
+
+        listDiv.innerHTML += `
+          <div style="padding:16px 0 0;font-size:12px;letter-spacing:1.5px;color:var(--text-mid);text-align:right;border-top:1px solid var(--cream-dark);margin-top:8px;">
+            Asistirán: <strong>${totalYes}</strong> | No asistirán: <strong>${totalNo}</strong><br>
+            <span style="font-size:11px;opacity:0.8;">Total: ${guests.length} respuestas</span>
+          </div>
+        `;
+      }
+
+      function deleteGuest(id) {
+        if (confirm("¿Estás seguro de eliminar esta confirmación?")) {
+          const guests = getGuests().filter((g) => g.id !== id);
+          saveGuests(guests);
+          renderList();
+        }
+      }
+
+      function clearGuests() {
+        if (confirm("¿ELIMINAR TODA LA LISTA de confirmados? Esta acción no se puede deshacer.")) {
+          localStorage.removeItem(STORAGE_KEY);
+          renderList();
+        }
+      }
+
+      function exportJSON() {
+        const guests = getGuests();
+        const blob = new Blob([JSON.stringify(guests, null, 2)], {
+          type: "application/json",
+        });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `invitados_boda_pedro_ruth_2026.json`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      }
+
+      // Add falling petals background
+      (function () {
+        const pb = document.getElementById("petals");
+        if (pb) {
+          for (let i = 0; i < 12; i++) {
+            const p = document.createElement("div");
+            p.className = "petal";
+            p.style.cssText = `
+              left:${Math.random() * 100}%;
+              width:${6 + Math.random() * 8}px;
+              height:${6 + Math.random() * 8}px;
+              animation-duration:${8 + Math.random() * 12}s;
+              animation-delay:${Math.random() * 10}s;
+              opacity:${0.1 + Math.random() * 0.2};
+            `;
+            pb.appendChild(p);
+          }
+        }
+      })();
+
+      // Initial render
+      renderList();
+    </script>
+  </body>
+</html>
