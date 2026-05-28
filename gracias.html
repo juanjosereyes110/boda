@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>¡Gracias! — Pedro Luis & Ruth Esther</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Josefin+Sans:wght@100;200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <style>
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e8ddd0;
+        padding: 40px 20px;
+        box-sizing: border-box;
+      }
+      .gracias-card {
+        width: min(420px, 100%);
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        padding: 48px 36px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .gracias-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #c9a96e, #a07850, #c9a96e);
+      }
+      .gracias-icon {
+        font-size: 52px;
+        margin-bottom: 16px;
+        display: block;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.08);
+        }
+      }
+      .gracias-title {
+        font-family: "Great Vibes", cursive;
+        font-size: 52px;
+        color: #7a5c42;
+        line-height: 1.1;
+        margin-bottom: 8px;
+      }
+      .gracias-sub {
+        font-family: "Josefin Sans", sans-serif;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #a07850;
+        margin-bottom: 28px;
+      }
+      .gracias-msg {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 18px;
+        line-height: 1.9;
+        color: #6b5740;
+        margin-bottom: 32px;
+      }
+      .divider {
+        width: 60px;
+        height: 1px;
+        background: #c9a96e;
+        margin: 0 auto 28px;
+      }
+      .gracias-date {
+        font-family: "Josefin Sans", sans-serif;
+        font-size: 13px;
+        letter-spacing: 4px;
+        color: #a07850;
+        margin-bottom: 8px;
+      }
+      .gracias-initials {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 28px;
+      }
+      .gi {
+        font-family: "Great Vibes", cursive;
+        font-size: 38px;
+        color: #7a5c42;
+      }
+      .gi-sep {
+        width: 40px;
+        height: 1px;
+        background: #c9a96e;
+      }
+      .btn-volver {
+        display: inline-block;
+        margin-top: 32px;
+        font-family: "Josefin Sans", sans-serif;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #7a5c42;
+        text-decoration: none;
+        border: 1px solid #c9a96e;
+        padding: 12px 28px;
+        border-radius: 2px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .btn-volver:hover {
+        background: #7a5c42;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Pétalos de fondo -->
+    <div class="petal-bg" id="petals"></div>
+
+    <div class="gracias-card">
+      <span class="gracias-icon">🤍</span>
+      <h1 class="gracias-title">¡Gracias!</h1>
+      <p class="gracias-sub">Tu confirmación fue recibida</p>
+      <div class="divider"></div>
+      <p class="gracias-msg">
+        Tu asistencia ha sido registrada.<br />
+        ¡Estamos muy felices de contarte<br />en este día tan especial!
+      </p>
+      <p class="gracias-date">VIERNES · 26 · JUNIO · 2026 · 5:30 PM</p>
+      <p
+        style="
+          font-family: &quot;Josefin Sans&quot;, sans-serif;
+          font-size: 12px;
+          letter-spacing: 2px;
+          color: #a07850;
+        "
+      >
+        Villa de Ramón de la Rosa<br />San Juan de la Maguana
+      </p>
+      <div class="gracias-initials">
+        <span class="gi">P</span>
+        <div class="gi-sep"></div>
+        <span class="gi">R</span>
+      </div>
+      <a href="/" class="btn-volver">✦ Volver a la Invitación ✦</a>
+    </div>
+
+    <script>
+      // Pétalos decorativos
+      (function () {
+        const pb = document.getElementById("petals");
+        if (!pb) return;
+        for (let i = 0; i < 14; i++) {
+          const p = document.createElement("div");
+          p.className = "petal";
+          p.style.cssText = `
+            left:${Math.random() * 100}%;
+            width:${6 + Math.random() * 8}px;
+            height:${6 + Math.random() * 8}px;
+            animation-duration:${8 + Math.random() * 12}s;
+            animation-delay:${Math.random() * 8}s;
+            opacity:${0.1 + Math.random() * 0.2};
+          `;
+          pb.appendChild(p);
+        }
+      })();
+    </script>
+  </body>
+</html>
