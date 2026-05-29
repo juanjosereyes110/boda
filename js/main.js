@@ -66,6 +66,6 @@ function startCountdown() {
     document.getElementById("cd-mins").textContent = String(m).padStart(2, "0");
     document.getElementById("cd-secs").textContent = String(s).padStart(2, "0");
     setTimeout(tick, 1000);
-  }
+  } 
   tick();
 }
