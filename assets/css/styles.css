@@ -284,6 +284,7 @@ body {
 .hero-title {
   font-family: "Great Vibes", cursive;
   font-size: clamp(46px, 11vw, 68px);
+  font-weight: 200;
   color: #fff;
   line-height: 1.1;
 }
